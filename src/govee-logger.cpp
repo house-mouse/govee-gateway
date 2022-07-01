@@ -258,15 +258,20 @@ Govee_logger::Govee_logger(const char* iniFileName)
   initialized=true;
 }
 
-void Govee_logger::logData(const BLEPacket *bp, const char* data)
+void Govee_logger::logData(const BLEPacket *bp, const BLEPacket::t_adStructure* p)
 {
+  const char *data = p->data;
   if (initialized)    // check if the logger has been intialized
   {
     // check if we have govee data
-    if (data[0]==0x88 && data[1]==0xEC)
+    if (p->length == 9 && data[0]==0x88 && data[1]==0xEC)
     {
       GoveeData gd;
-      gd.decodeData(data);
+      if (gd.decodeData(p) < 0) {
+	      printf("Failed decode?\n");
+      }
+
+
       gd.rssi = bp->rssi;
 
       // log data into queue

@@ -8,7 +8,7 @@ RELEASE_DIR  := deb/govee-gateway/usr/local/bin
 TARGET   := govee-gateway
 ifeq ($(MQTT),1)
 CXXFLAGS += -DMQTT
-LDFLAGS  += -lpaho-mqttpp3 -lpaho-mqtt3a
+LDFLAGS  += -lpaho-mqttpp3 -lpaho-mqtt3a -lpthread
 endif
 
 INCLUDE  := -I. -I./src -I/usr/local/include

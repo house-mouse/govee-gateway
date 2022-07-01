@@ -88,6 +88,7 @@ void scan(Govee_logger* gl)
 				std::map<int,BLEPacket::t_adStructure>::iterator it = bp.adStructures.find(0xff);
 				if (it!=bp.adStructures.end())
 				{
+//					printf("-> %02x%02x\n", it->second.data[0], it->second.data[1]);
 					// do we have a packet starting with 0x88EC? If so, we likely have a Govee sensor
 					if (it->second.data[0]==0x88 && it->second.data[1]==0xEC)
 					{
@@ -98,7 +99,7 @@ void scan(Govee_logger* gl)
 							goveeMap.insert(std::make_pair(bp.bdaddr,1));
 						}
 						// log data
-						gl->logData(&bp,it->second.data);
+						gl->logData(&bp,&it->second);
 					} // 088EC
 				} // manufacturer info
 				usleep(10000);		// 10000 us = 10ms = 0.01s

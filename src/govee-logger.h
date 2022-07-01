@@ -79,7 +79,7 @@ class Govee_logger
     Govee_logger(const char* iniFileName);
 
 		// log data
-    void logData(const BLEPacket* bp, const char* data);
+    void logData(const BLEPacket* bp, const BLEPacket::t_adStructure* p);
 };
 
 #endif // __Govee_lo
